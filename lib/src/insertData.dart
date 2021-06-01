@@ -65,7 +65,6 @@ class _InsertState extends State<Insert> {
     );
   }
 
-
   bool validateMobile(String number) {
     Pattern pattern = r'^(?:\+88|01)?(?:\d{11}|\d{13})$';
     RegExp regex = new RegExp(pattern);
@@ -74,13 +73,13 @@ class _InsertState extends State<Insert> {
     else
       return true;
   }
-  String mobileInvalidErrorMsg;
 
+  String mobileInvalidErrorMsg;
 
   _openGallery(BuildContext context) async {
     final _picker = ImagePicker();
     final pickedFile =
-    await _picker.getImage(source: ImageSource.gallery, imageQuality: 50);
+        await _picker.getImage(source: ImageSource.gallery, imageQuality: 50);
     final File file = File(pickedFile.path);
     // var picture = await ImagePicker.getImage(source: ImageSource.gallery, imageQuality: 50);
     setState(() {
@@ -93,7 +92,7 @@ class _InsertState extends State<Insert> {
   _openCamera(BuildContext context) async {
     final _picker = ImagePicker();
     final pickedFile =
-    await _picker.getImage(source: ImageSource.camera, imageQuality: 50);
+        await _picker.getImage(source: ImageSource.camera, imageQuality: 50);
     final File file = File(pickedFile.path);
 
     setState(() {
@@ -102,21 +101,18 @@ class _InsertState extends State<Insert> {
     Navigator.of(context).pop();
   }
 
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Insert Data'), centerTitle: true,),
+      appBar: AppBar(
+        title: Text('Insert Data'),
+        centerTitle: true,
+      ),
       body: ListView(
         children: [
           SizedBox(
             height: 20,
           ),
-
           SizedBox(
             height: 10,
           ),
@@ -135,7 +131,6 @@ class _InsertState extends State<Insert> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(height: 10),
-
                         SizedBox(height: 10),
                         TextFormField(
                           style: TextStyle(color: Color(0xFF000000)),
@@ -144,10 +139,12 @@ class _InsertState extends State<Insert> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white54,
-                            border: InputBorder.none,
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: new BorderSide(
-                                    color: Colors.red.shade200)),
+                            border: OutlineInputBorder(),
+
+                            // border: InputBorder.none,
+                            // focusedBorder: UnderlineInputBorder(
+                            //     borderSide: new BorderSide(
+                            //         color: Colors.red.shade200)),
 
                             hintText: "Enter your First Name",
                             labelText: "First Name",
@@ -167,7 +164,9 @@ class _InsertState extends State<Insert> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(
+                          height: 20,
+                        ),
                         TextFormField(
                           style: TextStyle(color: Color(0xFF000000)),
                           cursorColor: Color(0xFF9b9b9b),
@@ -176,14 +175,12 @@ class _InsertState extends State<Insert> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white54,
-                            border: InputBorder.none,
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: new BorderSide(
-                                    color: Colors.red.shade200)),
-
+                            border: OutlineInputBorder(),
+                            // focusedBorder: UnderlineInputBorder(
+                            //     borderSide:
+                            //         new BorderSide(color: Colors.red.shade200)),
                             hintText: "Enter Your Last Name",
                             labelText: "Last Name",
-
                             hintStyle: TextStyle(
                                 color: Color(0xFF9b9b9b),
                                 fontSize: 15,
@@ -199,7 +196,9 @@ class _InsertState extends State<Insert> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(
+                          height: 20,
+                        ),
                         TextFormField(
                           style: TextStyle(color: Color(0xFF000000)),
                           cursorColor: Color(0xFF9b9b9b),
@@ -209,69 +208,59 @@ class _InsertState extends State<Insert> {
                             errorText: mobileInvalidErrorMsg,
                             filled: true,
                             fillColor: Colors.white54,
-                            border: InputBorder.none,
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: new BorderSide(
-                                    color: Colors.red.shade200)),
-
+                            border: OutlineInputBorder(),
+                            // focusedBorder: UnderlineInputBorder(
+                            //     borderSide:
+                            //         new BorderSide(color: Colors.red.shade200)),
                             hintText: "Enter Your Mobile Number",
                             labelText: "Mobile",
-
                             hintStyle: TextStyle(
                                 color: Color(0xFF9b9b9b),
                                 fontSize: 15,
                                 fontWeight: FontWeight.normal),
                           ),
-                          onChanged: (lastNameValue){
+                          onChanged: (lastNameValue) {
                             mobile = lastNameValue;
-
                           },
 
-                         validator: (lastNameValue) {
-
-
-
-
+                          validator: (lastNameValue) {
                             if (lastNameValue.isEmpty) {
                               return 'Please enter your Mobile Number';
-                            } else if (lastNameValue.length != 11 ) {
+                            } else if (lastNameValue.length != 11) {
                               return 'please enter a valid Mobile Number';
                             }
-                           //lastName = lastNameValue;
-                           return null;
-                         },
+                            //lastName = lastNameValue;
+                            return null;
+                          },
                         ),
-                        SizedBox(height: 5),
-
-                        Column(children: [
-
-                          // //image
-                          Container(
-                            child: Center(
-                              child: Column(
-                                children: <Widget>[
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      _showChoiceDialog(context);
-                                    },
-                                    child: Text("Select Image"),
-                                  ),
-                                  _decideImageView(),
-                                ],
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Column(
+                          children: [
+                            // //image
+                            Container(
+                              child: Center(
+                                child: Column(
+                                  children: <Widget>[
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        _showChoiceDialog(context);
+                                      },
+                                      child: Text("Select Image"),
+                                    ),
+                                    _decideImageView(),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-
-                        ],),
-
-
-
-
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
                         Container(
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
+                          width: MediaQuery.of(context).size.width,
                           // padding: EdgeInsets.all(2),
                           margin: EdgeInsets.only(left: 30, right: 30),
                           decoration: BoxDecoration(
@@ -291,24 +280,25 @@ class _InsertState extends State<Insert> {
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
-                            onPressed: () async{
+                            onPressed: () async {
                               if (_formKey.currentState.validate()) {
                                 //  _login(position: widget.position);
-                             //   print(mobile);
-                            //    print(password);
+                                //   print(mobile);
+                                //    print(password);
                                 if (validateMobile(mobile)) {
                                   setState(() {
                                     mobileInvalidErrorMsg = null;
                                     _isLoading = true;
                                   });
-                                //  _insertData();
+                                  //  _insertData();
 
-                                 // List<int> imageBytes = imageFile.readAsBytesSync();
-                                //  String imageFileName = imageFile.path.split('/').last;
-                                  List<int>  imageBytes = await imageFile.readAsBytes();
+                                  // List<int> imageBytes = imageFile.readAsBytesSync();
+                                  //  String imageFileName = imageFile.path.split('/').last;
+                                  List<int> imageBytes =
+                                      await imageFile.readAsBytes();
                                   baseimage = base64.encode(imageBytes);
-                                //  print(imageFileName);
-                                //  print(baseimage);
+                                  //  print(imageFileName);
+                                  //  print(baseimage);
 
                                   _insertData();
                                 }
@@ -318,8 +308,6 @@ class _InsertState extends State<Insert> {
                           ),
                         ),
                         SizedBox(height: 8),
-
-
                       ],
                     )),
               ),
@@ -327,7 +315,6 @@ class _InsertState extends State<Insert> {
           ),
         ],
       ),
-
     );
   }
 
@@ -335,10 +322,14 @@ class _InsertState extends State<Insert> {
     setState(() {
       _isLoading = true;
     });
-    var data = {'firstName': firstName, 'lastName': lastName, 'mobile': mobile, 'image': baseimage};
-print(data);
-    var res = await Network().insertOneItem(
-        data: data);
+    var data = {
+      'firstName': firstName,
+      'lastName': lastName,
+      'mobile': mobile,
+      'image': baseimage
+    };
+    print(data);
+    var res = await Network().insertOneItem(data: data);
     // var body = json.decode(res.body);
     print(res.statusCode);
     if (res.statusCode == 200) {

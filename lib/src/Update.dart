@@ -7,9 +7,10 @@ import 'package:flutter_crud/services/networkHelper.dart';
 import 'showData.dart';
 
 class UpdateUI extends StatefulWidget {
-  UpdateUI({@required this.firstName, this.mobile, this.lastName});
+  UpdateUI(
+      {@required this.firstName, this.mobile, this.lastName, this.preImage});
 
-  final String firstName, lastName, mobile;
+  final String firstName, lastName, mobile, preImage;
 
   @override
   _UpdateUIState createState() => _UpdateUIState();
@@ -106,22 +107,23 @@ class _UpdateUIState extends State<UpdateUI> {
       body: ListView(
         shrinkWrap: true,
         children: [
-          Column(
-            children: [
-              Text(
-                'FistName: ' + widget.firstName,
-                style: TextStyle(fontSize: 25),
-              ),
-              Text(
-                'LastName: ' + widget.lastName,
-                style: TextStyle(fontSize: 25),
-              ),
-              Text(
-                'Mobile: ' + widget.mobile,
-                style: TextStyle(fontSize: 25),
-              ),
-            ],
-          ),
+          // Column(
+          //   children: [
+          //     Text(
+          //       'FistName: ' + widget.firstName,
+          //       style: TextStyle(fontSize: 25),
+          //     ),
+          //     Text(
+          //       'LastName: ' + widget.lastName,
+          //       style: TextStyle(fontSize: 25),
+          //     ),
+          //     Text(
+          //       'Mobile: ' + widget.mobile,
+          //       style: TextStyle(fontSize: 25),
+          //     ),
+          //   ],
+          // ),
+
           SizedBox(
             height: 10,
           ),
@@ -149,10 +151,10 @@ class _UpdateUIState extends State<UpdateUI> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white54,
-                            border: InputBorder.none,
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide:
-                                    new BorderSide(color: Colors.red.shade200)),
+                            border: OutlineInputBorder(),
+                            // focusedBorder: UnderlineInputBorder(
+                            //     borderSide:
+                            //         new BorderSide(color: Colors.red.shade200)),
 
                             hintText: "Enter your FistName",
                             labelText: "FirstName",
@@ -164,15 +166,17 @@ class _UpdateUIState extends State<UpdateUI> {
                           ),
                           validator: (mobileValue) {
                             if (mobileValue.isEmpty) {
-                              return 'Please enter Mobile Number';
+                              return 'Please Enter Your Name';
                             } else if (mobileValue.length < 4) {
-                              return 'please enter a valid number';
+                              return 'please enter a valid name';
                             }
                             firstName = mobileValue;
                             return null;
                           },
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(
+                          height: 20,
+                        ),
                         TextFormField(
                           initialValue: widget.lastName,
                           style: TextStyle(color: Color(0xFF000000)),
@@ -182,10 +186,10 @@ class _UpdateUIState extends State<UpdateUI> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white54,
-                            border: InputBorder.none,
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide:
-                                    new BorderSide(color: Colors.red.shade200)),
+                            border: OutlineInputBorder(),
+                            // focusedBorder: UnderlineInputBorder(
+                            //     borderSide:
+                            //         new BorderSide(color: Colors.red.shade200)),
                             hintText: "Enter your LastName",
                             labelText: "Last Name",
                             hintStyle: TextStyle(
@@ -195,13 +199,17 @@ class _UpdateUIState extends State<UpdateUI> {
                           ),
                           validator: (passwordValue) {
                             if (passwordValue.isEmpty) {
-                              return 'Please enter some text';
+                              return 'Please Enter Your Name';
+                            } else if (passwordValue.length < 4) {
+                              return 'please enter a valid name';
                             }
                             lastName = passwordValue;
                             return null;
                           },
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(
+                          height: 20,
+                        ),
                         TextFormField(
                           initialValue: widget.mobile,
                           style: TextStyle(color: Color(0xFF000000)),
@@ -211,10 +219,11 @@ class _UpdateUIState extends State<UpdateUI> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white54,
-                            border: InputBorder.none,
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide:
-                                    new BorderSide(color: Colors.red.shade200)),
+                            border: OutlineInputBorder(),
+                            // border: InputBorder.none,
+                            // focusedBorder: UnderlineInputBorder(
+                            //     borderSide:
+                            //         new BorderSide(color: Colors.red.shade200)),
                             hintText: "Enter Your Mobile Number",
                             labelText: "Mobile",
                             hintStyle: TextStyle(
@@ -236,7 +245,9 @@ class _UpdateUIState extends State<UpdateUI> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(
+                          height: 20,
+                        ),
                         Column(
                           children: [
                             // //image
@@ -248,14 +259,25 @@ class _UpdateUIState extends State<UpdateUI> {
                                       onPressed: () {
                                         _showChoiceDialog(context);
                                       },
-                                      child: Text("Select Image"),
+                                      child: Text("Select Image for update"),
                                     ),
-                                    _decideImageView(),
+                                    if (widget.preImage == null)
+                                      _decideImageView(),
+                                    Image.memory(
+                                      base64.decode(
+                                        widget.preImage.toString(),
+                                      ),
+                                      height: 160,
+                                      width: 160,
+                                    ),
                                   ],
                                 ),
                               ),
                             ),
                           ],
+                        ),
+                        SizedBox(
+                          height: 20,
                         ),
                         Container(
                           width: MediaQuery.of(context).size.width,
